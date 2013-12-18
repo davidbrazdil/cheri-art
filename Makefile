@@ -15,10 +15,13 @@ BUILD_SYSTEM=build/core
 DALVIK_VM_LIB='libart.so'
 
 .PHONY: default
-default: build-art-host
+default: build-art-target
+
+include build/core/config.mk
 
 include build/core/combo/HOST_linux-x86.mk
 include build/core/definitions.mk
 include build/core/dex_preopt.mk
 include art/Android.mk
 
+$(eval $(call build-libarttest,target))
