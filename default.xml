@@ -27,6 +27,7 @@
   <project path="system/core" name="platform/system/core" groups="pdk" />
   <project path="frameworks/base" name="platform/frameworks/base" />
   <project path="sdk" name="platform/sdk" />
+  <project path="prebuilts/sdk" name="platform/prebuilts/sdk" groups="pdk" />
 
 <!--
   <project path="abi/cpp" name="platform/abi/cpp" groups="pdk" />
