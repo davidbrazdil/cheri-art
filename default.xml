@@ -31,7 +31,6 @@
   <project path="frameworks/base" remote="davidbrazdil" name="cheri-art_frameworks_base" />
   <project path="system/core" remote="davidbrazdil" name="cheri-art_system_core" groups="pdk" />
 
-  <project path="sdk" name="platform/sdk" />
   <project path="prebuilts/sdk" name="platform/prebuilts/sdk" groups="pdk" />
 
   <project path="libcore" name="platform/libcore" />
@@ -46,6 +45,7 @@
   <project path="frameworks/opt/telephony" name="platform/frameworks/opt/telephony" groups="pdk" />
 
 <!--
+  <project path="sdk" name="platform/sdk" />
   <project path="abi/cpp" name="platform/abi/cpp" groups="pdk" />
   <project path="cts" name="platform/cts" groups="cts" />
   <project path="development" name="platform/development" />
