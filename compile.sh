@@ -9,4 +9,3 @@ cd "$WORKING_DIR"
 lunch aosp_mips-eng || exit
 mmma art
 
-
