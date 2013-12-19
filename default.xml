@@ -32,9 +32,13 @@
 
   <project path="libcore" name="platform/libcore" />
   <project path="external/apache-http" name="platform/external/apache-http" />
-  <project path="frameworks/support" name="platform/frameworks/support" />
+  <project path="external/junit" name="platform/external/junit" />
   <project path="external/libphonenumber" name="platform/external/libphonenumber" />
+  <project path="external/nist-sip" name="platform/external/nist-sip" />
   <project path="external/tagsoup" name="platform/external/tagsoup" />
+  <project path="frameworks/support" name="platform/frameworks/support" />
+  <project path="frameworks/opt/net/voip" name="platform/frameworks/opt/net/voip" />
+  <project path="frameworks/opt/telephony" name="platform/frameworks/opt/telephony" groups="pdk" />
 
 <!--
   <project path="abi/cpp" name="platform/abi/cpp" groups="pdk" />
@@ -87,7 +91,6 @@
   <project path="external/jpeg" name="platform/external/jpeg" groups="pdk" />
   <project path="external/jsilver" name="platform/external/jsilver" />
   <project path="external/jsr305" name="platform/external/jsr305" />
-  <project path="external/junit" name="platform/external/junit" />
   <project path="external/kernel-headers" name="platform/external/kernel-headers" />
   <project path="external/libcap-ng" name="platform/external/libcap-ng" />
   <project path="external/libffi" name="platform/external/libffi" />
@@ -129,7 +132,6 @@
   <project path="external/netperf" name="platform/external/netperf" />
   <project path="external/neven" name="platform/external/neven" />
   <project path="external/nist-pkits" name="platform/external/nist-pkits" />
-  <project path="external/nist-sip" name="platform/external/nist-sip" />
   <project path="external/noto-fonts" name="platform/external/noto-fonts" />
   <project path="external/pcre" name="platform/external/pcre" />
   <project path="external/pixman" name="platform/external/pixman" />
