@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-WORKING_DIR="repo"
+WORKING_DIR="work"
 
 
 cd "$WORKING_DIR"
