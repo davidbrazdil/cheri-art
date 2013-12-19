@@ -26,8 +26,15 @@
   <project path="external/gtest" name="platform/external/gtest" groups="pdk" />
   <project path="system/core" name="platform/system/core" groups="pdk" />
   <project path="frameworks/base" name="platform/frameworks/base" />
+
   <project path="sdk" name="platform/sdk" />
   <project path="prebuilts/sdk" name="platform/prebuilts/sdk" groups="pdk" />
+
+  <project path="libcore" name="platform/libcore" />
+  <project path="external/apache-http" name="platform/external/apache-http" />
+  <project path="frameworks/support" name="platform/frameworks/support" />
+  <project path="external/libphonenumber" name="platform/external/libphonenumber" />
+  <project path="external/tagsoup" name="platform/external/tagsoup" />
 
 <!--
   <project path="abi/cpp" name="platform/abi/cpp" groups="pdk" />
@@ -35,7 +42,6 @@
   <project path="development" name="platform/development" />
   <project path="external/antlr" name="platform/external/antlr" />
   <project path="external/apache-harmony" name="platform/external/apache-harmony" />
-  <project path="external/apache-http" name="platform/external/apache-http" />
   <project path="external/apache-qp" name="platform/external/apache-qp" />
   <project path="external/apache-xml" name="platform/external/apache-xml" />
   <project path="external/bison" name="platform/external/bison" groups="pdk" />
@@ -93,7 +99,6 @@
   <project path="external/libnl-headers" name="platform/external/libnl-headers" groups="pdk" />
   <project path="external/libogg" name="platform/external/libogg" />
   <project path="external/libpcap" name="platform/external/libpcap" />
-  <project path="external/libphonenumber" name="platform/external/libphonenumber" />
   <project path="external/libpng" name="platform/external/libpng" groups="pdk" />
   <project path="external/libppp" name="platform/external/libppp" />
   <project path="external/libseccomp-helper" name="platform/external/libseccomp-helper" />
@@ -149,7 +154,6 @@
   <project path="external/strace" name="platform/external/strace" />
   <project path="external/stressapptest" name="platform/external/stressapptest" />
   <project path="external/svox" name="platform/external/svox" />
-  <project path="external/tagsoup" name="platform/external/tagsoup" />
   <project path="external/tcpdump" name="platform/external/tcpdump" />
   <project path="external/timezonepicker-support" name="platform/external/timezonepicker-support" />
   <project path="external/tinyalsa" name="platform/external/tinyalsa" groups="pdk" />
@@ -164,7 +168,6 @@
   <project path="frameworks/compile/mclinker" name="platform/frameworks/compile/mclinker" groups="pdk" />
   <project path="frameworks/compile/slang" name="platform/frameworks/compile/slang" groups="pdk" />
   <project path="frameworks/native" name="platform/frameworks/native" groups="pdk" />
-  <project path="libcore" name="platform/libcore" />
   <project path="libnativehelper" name="platform/libnativehelper" groups="pdk-java" />
   <project path="ndk" name="platform/ndk" />
   <project path="pdk" name="platform/pdk" groups="pdk" />
