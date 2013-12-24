@@ -1,0 +1,25 @@
+From c22f0fc2cc36455060c1ce0ba2cd965462e2c451 Mon Sep 17 00:00:00 2001
+From: David Brazdil <david.brazdil@gmail.com>
+Date: Tue, 24 Dec 2013 14:26:58 +0000
+Subject: [PATCH] Workaround for failed base.txz compilation
+
+---
+ release/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/release/Makefile b/release/Makefile
+index 847dda9..d0e8e2c 100644
+--- a/release/Makefile
++++ b/release/Makefile
+@@ -87,7 +87,7 @@ base.txz:
+ 	    "TARGET_ARCH=${TARGET_ARCH} TARGET=${TARGET}" -D "${.OBJDIR}/${DISTDIR}/base"
+ # Package all components
+ 	cd ${WORLDDIR} && ${IMAKE} packageworld DISTDIR=${.OBJDIR}/${DISTDIR}
+-	mv ${DISTDIR}/*.txz .
++	cd ${.CURDIR} && mv ${DISTDIR}/*.txz .
+ 
+ kernel.txz:
+ 	mkdir -p ${DISTDIR}
+-- 
+1.8.4.3
+
