@@ -28,8 +28,8 @@ check_dep clang++ "Required for building LLVM"
 check_dep git "Required for fetching source code"
 WD=`pwd`
 if [ x"${MAKEOBJDIRPREFIX}" == x ] ; then
-	mkdir sdk-obj
 	export MAKEOBJDIRPREFIX=${WD}/tmp-sdk
+	mkdir "$MAKEOBJDIRPREFIX"
 fi
 if [ x"${JFLAG}" == x ] ; then
 	JFLAG=-j8
