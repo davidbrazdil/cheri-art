@@ -1,7 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-WORKING_DIR=work
-mkdir "$WORKING_DIR" || exit
-cd "$WORKING_DIR" || exit
+source config.sh
+
+mkdir "$DIR_ANDROID" || exit
+cd "$DIR_ANDROID" || exit
 repo init -u git@github.com:davidbrazdil/cheri-art.git || exit
 repo sync || exit
