@@ -24,8 +24,10 @@ FOUNDDEPS=1
 echo Checking dependencies...
 check_dep cmake "Required for building LLVM"
 check_dep ninja "Required for building LLVM"
+check_dep clang "Required for building clang-wrapper"
 check_dep clang++ "Required for building LLVM"
 check_dep git "Required for fetching source code"
+
 WD=`pwd`
 if [ x"${MAKEOBJDIRPREFIX}" == x ] ; then
 	export MAKEOBJDIRPREFIX=${WD}/tmp-sdk
@@ -39,6 +41,7 @@ if [ ${FOUNDDEPS} == 0 ] ; then
 	exit 1
 fi
 echo All dependencies satisfied
+
 SYSROOT_DIR="$DIR_CHERISDK"
 if [ ! -d "${SYSROOT_DIR}" ] ; then
 	mkdir -p "${SYSROOT_DIR}"
@@ -65,6 +68,7 @@ else
 	try_to_run git clone https://github.com/CTSRD-CHERI/clang
 fi
 cd ..
+
 if [ -d Build ] ; then
 	cd Build
 else
@@ -73,15 +77,32 @@ else
 	echo Configuring LLVM Build...
 	try_to_run cmake .. -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Release -DDEFAULT_SYSROOT=${SYSROOT_DIR} -DLLVM_DEFAULT_TARGET_TRIPLE=cheri-unknown-freebsd -DCMAKE_INSTALL_PREFIX=${SYSROOT_DIR} -G Ninja
 fi
+
 echo Building LLVM...
 try_to_run ninja
 echo Installing LLVM...
 try_to_run ninja install
 cd ../..
+
 # delete some things that we don't need...
 rm -rf ${SYSROOT_DIR}/lib/lib*
 rm -rf ${SYSROOT_DIR}/share
 rm -rf ${SYSROOT_DIR}/include
+
+if [ -d clang-wrapper ] ; then
+	echo Updating clang-wrapper...
+    cd clang-wrapper
+	try_to_run git pull --rebase
+else
+	echo Fetching clang-wrapper...
+	try_to_run git clone https://git.linaro.org/people/bernhard.rosenkranzer/clang-wrapper.git
+    cd clang-wrapper
+fi
+
+echo Building clang-wrapper...
+try_to_run clang -O2 -DCLANG_PATH=\".\" -o clang-wrapper clang-wrapper.c
+cd ..
+
 CHERIBSD_ROOT=`pwd`/cheribsd
 if [ -d cheribsd ] ; then
 	echo Updating CHERIbsd...
@@ -95,6 +116,7 @@ else
     try_to_run git am --signoff < ../cheribsd_base-txz.patch
     cd ..
 fi
+
 cd ${CHERIBSD_ROOT}
 echo Building the toolchain...
 CHERIBSD_OBJ="`pwd`"
@@ -103,11 +125,14 @@ try_to_run make $JFLAG toolchain TARGET=mips TARGET_ARCH=mips64 CPUTYPE=${CPUTYP
 echo Building FreeBSD base distribution...
 try_to_run make ${JFLAG} -DWITHOUT_SVNLITE TARGET=mips TARGET_ARCH=mips64 CPUTYPE=${CPUTYPE} -DDB_FROM_SRC -DNOCLEAN -j64 buildworld
 cd release
+
 echo Creating base system tarball...
 try_to_run make ${JFLAG} -DWITHOUT_SVNLITE TARGET=mips TARGET_ARCH=mips64 CPUTYPE=${CPUTYPE} -DDB_FROM_SRC -DNOCLEAN -j64 base.txz -DNO_ROOT
+
 echo Populating SDK...
 cd ${SYSROOT_DIR}
 try_to_run tar xJ --include="usr/include" --include="lib/" --include="usr/lib/" -f ${CHERIBSD_OBJ}/release/base.txz 
+
 echo Installing tools...
 TOOLS="as lint objdump strings addr2line c++filt crunchide gcov nm readelf strip ld objcopy size"
 for TOOL in ${TOOLS} ; do
@@ -119,6 +144,7 @@ for TOOL in ${TOOLS} ; do
 	ln -fs $TOOL ${SYSROOT_DIR}/bin/mips4-unknown-freebsd-${TOOL}
 	ln -fs $TOOL ${SYSROOT_DIR}/bin/mips64-unknown-freebsd-${TOOL}
 done
+
 echo Fixing absolute paths in symbolic links inside lib directory...
 echo | cat | cc -x c - -o ${SYSROOT_DIR}/bin/fixlinks <<EOF
 #include <sys/types.h>
@@ -160,6 +186,7 @@ int main(int argc, char **argv)
 	closedir(dir);
 }
 EOF
+
 cd ${SYSROOT_DIR}/usr/lib
 try_to_run ../../bin/fixlinks 
 echo Compiling cheridis helper...
@@ -187,6 +214,18 @@ int main(int argc, char** argv)
 	pclose(dis);
 }
 EOF
+
+echo Creating links to clang-wrapper...
+try_to_run mv "$WD/clang-wrapper/clang-wrapper" "${SYSROOT_DIR}/bin/"
+cd "${SYSROOT_DIR}/bin/"
+for i in cheri-unknown-freebsd mips4-unknown-freebsd mips64-unknown-freebsd; do
+	ln -s clang-wrapper $i-gcc
+	ln -s clang-wrapper $i-g++
+	ln -s clang-wrapper $i-cc
+	ln -s clang-wrapper $i-c++
+	ln -s clang-wrapper $i-gcc-4.7.3
+done
+
 echo Done.  Use ${SYSROOT_DIR}/bin/freebsd-unknown-clang to compile code.
 echo Add --sysroot=${SYSROOT_DIR} -B${SYSROOT_DIR} to your CFLAGS
 rm -f error.log
