@@ -12,7 +12,7 @@
            remote="aosp"
            sync-j="4" />
 
-  <project path="build" remote="davidbrazdil" name="cheri-art_build" groups="pdk" >
+  <project path="build" remote="davidbrazdil" name="cheri-art_build" revision="cheri" groups="pdk" >
     <copyfile src="core/root.mk" dest="Makefile" />
   </project>
   <project path="art" name="platform/art" />
