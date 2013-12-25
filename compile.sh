@@ -2,7 +2,7 @@
 
 source config.sh
 
-export PATH="$PATH":"$DIR_OPENJDK"
+export PATH="$DIR_BIN":"$PATH":"$DIR_OPENJDK"
 export EXPERIMENTAL_USE_JAVA7=true
 
 export TARGET_OS=freebsd
