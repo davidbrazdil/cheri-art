@@ -2,24 +2,9 @@
 
 source config.sh
 
-check_dep()
-{
-	if [ x"`whereis $1`" == x ] ; then
-		echo error: No $1 binary found in PATH: ${PATH}
-		echo $2
-		FOUNDDEPS=0
-	else
-		echo -- Found $1...
-	fi
-}
-try_to_run()
-{
-	$@ > ${WD}/error.log 2>&1
-	if [ $? -ne 0 ] ; then
-		echo $1 failed, see error.log for details
-		exit 1
-	fi
-}
+mkdir -p "$DIR_CHERISDK"
+cd "$DIR_CHERISDK"
+
 FOUNDDEPS=1
 echo Checking dependencies...
 check_dep cmake "Required for building LLVM"
@@ -30,19 +15,19 @@ check_dep git "Required for fetching source code"
 
 WD=`pwd`
 if [ x"${MAKEOBJDIRPREFIX}" == x ] ; then
-	export MAKEOBJDIRPREFIX=${WD}/tmp-sdk
-	mkdir "$MAKEOBJDIRPREFIX"
+	export MAKEOBJDIRPREFIX=${WD}/tmp
+	mkdir -p "$MAKEOBJDIRPREFIX"
 fi
 if [ x"${JFLAG}" == x ] ; then
-	JFLAG=-j8
-	echo No JFLAG specified, defaulting to -j8
+	JFLAG=-j1
+	echo No JFLAG specified, defaulting to -j1
 fi
 if [ ${FOUNDDEPS} == 0 ] ; then
 	exit 1
 fi
 echo All dependencies satisfied
 
-SYSROOT_DIR="$DIR_CHERISDK"
+SYSROOT_DIR="$WD/out"
 if [ ! -d "${SYSROOT_DIR}" ] ; then
 	mkdir -p "${SYSROOT_DIR}"
 fi
@@ -89,32 +74,32 @@ rm -rf ${SYSROOT_DIR}/lib/lib*
 rm -rf ${SYSROOT_DIR}/share
 rm -rf ${SYSROOT_DIR}/include
 
-if [ -d clang-wrapper ] ; then
+CLANGWRAPPER_ROOT="$WD"/clang-wrapper
+if [ -d "$CLANGWRAPPER_ROOT" ] ; then
 	echo Updating clang-wrapper...
-    cd clang-wrapper
+    cd "$CLANGWRAPPER_ROOT"
 	try_to_run git pull --rebase
 else
 	echo Fetching clang-wrapper...
 	try_to_run git clone https://git.linaro.org/people/bernhard.rosenkranzer/clang-wrapper.git
-    cd clang-wrapper
 fi
 
 echo Building clang-wrapper...
+cd "$CLANGWRAPPER_ROOT"
 try_to_run clang -O2 -DCLANG_PATH=\".\" -o clang-wrapper clang-wrapper.c
-cd ..
 
-CHERIBSD_ROOT=`pwd`/cheribsd
-if [ -d cheribsd ] ; then
+CHERIBSD_ROOT="$WD"/cheribsd
+if [ -d "$CHERIBSD_ROOT" ] ; then
 	echo Updating CHERIbsd...
-	cd cheribsd 
-	try_to_run git pull --rebase
-	cd ..
+	cd "$CHERIBSD_ROOT" 
+	# try_to_run git pull --rebase
 else
 	echo Fetching CHERIbsd...
+    cd "$WD"
 	try_to_run git clone https://github.com/CTSRD-CHERI/cheribsd
-    cd cheribsd
-    try_to_run git am --signoff < ../cheribsd_base-txz.patch
-    cd ..
+    cd "$CHERIBSD_ROOT"
+    echo Applying CHERIbsd Makefile patch...
+    try_to_run git am --signoff < "$ROOT_DIR"/cheribsd_base-txz.patch
 fi
 
 cd ${CHERIBSD_ROOT}
@@ -123,11 +108,11 @@ CHERIBSD_OBJ="`pwd`"
 CHERITOOLS_OBJ="${MAKEOBJDIRPREFIX}/mips.mips64/`pwd`/tmp/usr/bin/"
 try_to_run make $JFLAG toolchain TARGET=mips TARGET_ARCH=mips64 CPUTYPE=${CPUTYPE} -DNOCLEAN
 echo Building FreeBSD base distribution...
-try_to_run make ${JFLAG} -DWITHOUT_SVNLITE TARGET=mips TARGET_ARCH=mips64 CPUTYPE=${CPUTYPE} -DDB_FROM_SRC -DNOCLEAN -j64 buildworld
+try_to_run make ${JFLAG} -DWITHOUT_SVNLITE TARGET=mips TARGET_ARCH=mips64 CPUTYPE=${CPUTYPE} -DDB_FROM_SRC -DNOCLEAN buildworld
 cd release
 
 echo Creating base system tarball...
-try_to_run make ${JFLAG} -DWITHOUT_SVNLITE TARGET=mips TARGET_ARCH=mips64 CPUTYPE=${CPUTYPE} -DDB_FROM_SRC -DNOCLEAN -j64 base.txz -DNO_ROOT
+try_to_run make ${JFLAG} -DWITHOUT_SVNLITE TARGET=mips TARGET_ARCH=mips64 CPUTYPE=${CPUTYPE} -DDB_FROM_SRC -DNOCLEAN base.txz -DNO_ROOT
 
 echo Populating SDK...
 cd ${SYSROOT_DIR}
@@ -216,7 +201,7 @@ int main(int argc, char** argv)
 EOF
 
 echo Creating links to clang-wrapper...
-try_to_run mv "$WD/clang-wrapper/clang-wrapper" "${SYSROOT_DIR}/bin/"
+try_to_run mv "$CLANGWRAPPER_ROOT/clang-wrapper" "${SYSROOT_DIR}/bin/"
 cd "${SYSROOT_DIR}/bin/"
 for i in cheri-unknown-freebsd mips4-unknown-freebsd mips64-unknown-freebsd; do
 	ln -s clang-wrapper $i-gcc
