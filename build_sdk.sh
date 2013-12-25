@@ -92,7 +92,7 @@ CHERIBSD_ROOT="$WD"/cheribsd
 if [ -d "$CHERIBSD_ROOT" ] ; then
 	echo Updating CHERIbsd...
 	cd "$CHERIBSD_ROOT" 
-	# try_to_run git pull --rebase
+	try_to_run git pull --rebase
 else
 	echo Fetching CHERIbsd...
     cd "$WD"
