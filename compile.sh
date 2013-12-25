@@ -17,6 +17,6 @@ ln -s "$DIR_CHERISDK"/out "$PREBUILT_COMPILER_PATH"
 
 
 . build/envsetup.sh || exit
-lunch aosp_cheri-eng || exit
+lunch aosp_mips-eng || exit
 mmma art
 
