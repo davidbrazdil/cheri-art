@@ -13,7 +13,7 @@ PREBUILT_COMPILER_ROOT="prebuilts/gcc/freebsd-x86/mips"
 PREBUILT_COMPILER_PATH="$PREBUILT_COMPILER_ROOT/mips64-unknown-freebsd"
 rm -rf "$PREBUILT_COMPILER_PATH"
 mkdir -p "$PREBUILT_COMPILER_ROOT"
-ln -s "$DIR_CHERISDK" "$PREBUILT_COMPILER_PATH" 
+ln -s "$DIR_CHERISDK"/out "$PREBUILT_COMPILER_PATH" 
 
 
 . build/envsetup.sh || exit
