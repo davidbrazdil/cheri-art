@@ -21,7 +21,7 @@
   <project path="device/common" name="device/common" />
   <project path="device/generic/mips" name="device/generic/mips" groups="pdk" />
   <project path="device/generic/x86" name="device/generic/x86" groups="pdk" />
-  <project path="external/llvm" name="platform/external/llvm" groups="pdk" />
+  <project path="external/llvm" remote="davidbrazdil" name="cheri-art_llvm" revision="cheri" groups="pdk" />
   <project path="external/clang" name="platform/external/clang" groups="pdk" />
   <project path="external/stlport" name="platform/external/stlport" groups="pdk" />
   <project path="external/icu4c" name="platform/external/icu4c" groups="pdk" />
