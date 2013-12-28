@@ -13,7 +13,7 @@ else
 fi
 TARGETS="x86_64-portbld-freebsd10.0 i386-portbld-freebsd10.0"
 
-. ./get-source.sh
+#. ./get-source.sh
 
 . ./build.sh
 

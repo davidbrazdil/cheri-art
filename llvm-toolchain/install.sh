@@ -1,7 +1,5 @@
 #!/bin/sh
 
-LOCAL_DIR="`pwd`"
-
 cd binutils
 for i in $TARGETS; do
 	cd build-$i
@@ -22,13 +20,20 @@ if ! mv clang-wrapper/clang-wrapper "$TEMP"/llvm-toolchain/bin/; then
 	echo "Clang-Wrapper failed to install."
 	exit 1
 fi
-pushd "$TEMP"/llvm-toolchain/bin
+
+BIN_FOLDER="$TEMP"/llvm-toolchain/bin
+pushd "$BIN_FOLDER"
 for i in $TARGETS; do
 	ln -s clang-wrapper $i-gcc
 	ln -s clang-wrapper $i-g++
 	ln -s clang-wrapper $i-cc
 	ln -s clang-wrapper $i-c++
 	ln -s clang-wrapper $i-gcc-4.7.3
+
+    pushd "$BIN_FOLDER"/../"$i"/bin
+    cp "$BIN_FOLDER"/$i-* .
+    cp "$BIN_FOLDER"/clang-wrapper .
+    popd
 done
 popd
 
