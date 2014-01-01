@@ -30,6 +30,7 @@
   <project path="external/gtest" name="platform/external/gtest" groups="pdk" />
   <project path="frameworks/base" name="platform/frameworks/base" />
   <project path="system/core" remote="davidbrazdil" name="cheri-art_system_core" revision="cheri" groups="pdk" />
+  <project path="libnativehelper" name="platform/libnativehelper" groups="pdk-java" />
 
   <project path="prebuilts/sdk" name="platform/prebuilts/sdk" groups="pdk" />
 
@@ -174,7 +175,6 @@
   <project path="frameworks/compile/libbcc" name="platform/frameworks/compile/libbcc" groups="pdk" />
   <project path="frameworks/compile/mclinker" name="platform/frameworks/compile/mclinker" groups="pdk" />
   <project path="frameworks/compile/slang" name="platform/frameworks/compile/slang" groups="pdk" />
-  <project path="libnativehelper" name="platform/libnativehelper" groups="pdk-java" />
   <project path="ndk" name="platform/ndk" />
   <project path="pdk" name="platform/pdk" groups="pdk" />
   <project path="prebuilts/clang/darwin-x86/3.1" name="platform/prebuilts/clang/darwin-x86/3.1" groups="pdk,darwin" />
