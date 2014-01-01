@@ -2,10 +2,15 @@
 
 source config.sh
 
-export PATH="$DIR_BIN":"$PATH":"$DIR_OPENJDK"
+export PATH="$DIRS_EXTRA":"$PATH"
 export EXPERIMENTAL_USE_JAVA7=true
 
 export TARGET_OS=freebsd
+
+export CC=clang
+export CPP=clang++
+export CXX=clang++  
+export AR=/usr/local/bin/ar
 
 cd "$DIR_ANDROID"
 
