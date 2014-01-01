@@ -29,7 +29,7 @@
   <project path="external/zlib" name="platform/external/zlib" groups="pdk" />
   <project path="external/gtest" name="platform/external/gtest" groups="pdk" />
   <project path="frameworks/base" name="platform/frameworks/base" />
-  <project path="system/core" name="platform/system/core" groups="pdk" />
+  <project path="system/core" remote="davidbrazdil" name="cheri-art_system_core" revision="cheri" groups="pdk" />
 
   <project path="prebuilts/sdk" name="platform/prebuilts/sdk" groups="pdk" />
 

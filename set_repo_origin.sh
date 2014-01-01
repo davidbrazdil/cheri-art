@@ -17,4 +17,7 @@ set_origin \
 set_origin \
   external/llvm \
   git@github.com:davidbrazdil/cheri-art_llvm.git
+set_origin \
+  system/core \
+  git@github.com:davidbrazdil/cheri-art_system_core.git
 
