@@ -20,4 +20,7 @@ set_origin \
 set_origin \
   system/core \
   git@github.com:davidbrazdil/cheri-art_system_core.git
+set_origin \
+  art \
+  git@github.com:davidbrazdil/cheri-art_art.git
 

@@ -15,7 +15,7 @@
   <project path="build" remote="davidbrazdil" name="cheri-art_build" revision="cheri" groups="pdk" >
     <copyfile src="core/root.mk" dest="Makefile" />
   </project>
-  <project path="art" name="platform/art" />
+  <project path="art" remote="davidbrazdil" name="cheri-art_art" revision="cheri" />
   <project path="bionic" name="platform/bionic" groups="pdk" />
   <project path="dalvik" name="platform/dalvik" />
   <project path="device/common" name="device/common" />
