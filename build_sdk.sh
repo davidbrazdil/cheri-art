@@ -121,7 +121,7 @@ try_to_run tar xJ --include="usr/include" --include="lib/" --include="usr/lib/" 
 echo Installing tools...
 TOOLS="as lint objdump strings addr2line c++filt crunchide gcov nm readelf strip ld objcopy size"
 for TOOL in ${TOOLS} ; do
-	cp -f ${CHERITOOLS_OBJ}/${TOOL} ${SYSROOT_DIR}/${TOOL}
+	cp -f ${CHERITOOLS_OBJ}/${TOOL} ${SYSROOT_DIR}/bin/${TOOL}
 done
 TOOLS="${TOOLS} clang clang++ llvm-mc llvm-objdump llvm-readobj llvm-size llc"
 for TOOL in ${TOOLS} ; do
