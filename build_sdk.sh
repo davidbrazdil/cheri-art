@@ -19,8 +19,8 @@ if [ x"${MAKEOBJDIRPREFIX}" == x ] ; then
 	mkdir -p "$MAKEOBJDIRPREFIX"
 fi
 if [ x"${JFLAG}" == x ] ; then
-	JFLAG=-j1
-	echo No JFLAG specified, defaulting to -j1
+	JFLAG=-j8
+	echo No JFLAG specified, defaulting to -j8
 fi
 if [ ${FOUNDDEPS} == 0 ] ; then
 	exit 1
