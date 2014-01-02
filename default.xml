@@ -16,7 +16,6 @@
     <copyfile src="core/root.mk" dest="Makefile" />
   </project>
   <project path="art" remote="davidbrazdil" name="cheri-art_art" revision="cheri" />
-  <project path="bionic" name="platform/bionic" groups="pdk" />
   <project path="dalvik" name="platform/dalvik" />
   <project path="device/common" name="device/common" />
   <project path="device/generic/mips" name="device/generic/mips" groups="pdk" />
@@ -48,6 +47,7 @@
   <project path="frameworks/opt/telephony" name="platform/frameworks/opt/telephony" groups="pdk" />
 
 <!--
+  <project path="bionic" name="platform/bionic" groups="pdk" />
   <project path="sdk" name="platform/sdk" />
   <project path="abi/cpp" name="platform/abi/cpp" groups="pdk" />
   <project path="cts" name="platform/cts" groups="cts" />
