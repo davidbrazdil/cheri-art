@@ -23,5 +23,5 @@ ln -s "$DIR_CHERISDK"/out "$PREBUILT_COMPILER_PATH"
 
 . build/envsetup.sh || exit
 lunch cheri_mips-eng || exit
-mmma art
+mmma showcommands art
 
