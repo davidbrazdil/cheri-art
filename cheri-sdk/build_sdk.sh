@@ -138,7 +138,7 @@ if [ $? -ne 0 ] ; then
 	exit 1
 fi
 echo Installing tools...
-TOOLS="lint objdump strings addr2line c++filt crunchide gcc gcov nm readelf strip ld objcopy size"
+TOOLS="as lint objdump strings addr2line c++filt crunchide gcc gcov nm readelf strip ld objcopy size"
 for TOOL in ${TOOLS} ; do
 	cp -f ${CHERITOOLS_OBJ}/${TOOL} ${SYSROOT_DIR}/bin/${TOOL}
 done
