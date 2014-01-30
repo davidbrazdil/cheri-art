@@ -3,7 +3,7 @@
 source config.sh
 
 pushd "$DIR_CHERISDK"
-MAKEOBJDIRPREFIX="`pwd`/tmp" ./build_sdk.sh 
+MAKEOBJDIRPREFIX="$DIR_CHERISDK/tmp" ./build_sdk.sh
 
 CLANGWRAPPER_ROOT="`pwd`"/clang-wrapper
 if [ -d "$CLANGWRAPPER_ROOT" ] ; then
