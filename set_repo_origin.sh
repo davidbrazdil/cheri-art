@@ -18,9 +18,15 @@ set_origin \
   external/llvm \
   git@github.com:davidbrazdil/cheri-art_llvm.git
 set_origin \
+  external/stlport \
+  git@github.com:davidbrazdil/cheri-art_stlport.git
+set_origin \
   system/core \
   git@github.com:davidbrazdil/cheri-art_system_core.git
 set_origin \
   art \
   git@github.com:davidbrazdil/cheri-art_art.git
+set_origin \
+  libnativehelper \
+  git@github.com:davidbrazdil/cheri-art_libnativehelper.git
 

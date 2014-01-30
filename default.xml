@@ -16,10 +16,10 @@
     <copyfile src="core/root.mk" dest="Makefile" />
   </project>
   <project path="art" remote="davidbrazdil" name="cheri-art_art" revision="cheri" />
-  <project path="external/stlport" name="platform/external/stlport" groups="pdk" />
+  <project path="external/stlport" remote="davidbrazdil" name="cheri-art_stlport" revision="cheri" groups="pdk" />
   <project path="external/llvm" remote="davidbrazdil" name="cheri-art_llvm" revision="cheri" groups="pdk" />
   <project path="system/core" remote="davidbrazdil" name="cheri-art_system_core" revision="cheri" groups="pdk" />
-  <project path="libnativehelper" name="platform/libnativehelper" groups="pdk-java" />
+  <project path="libnativehelper" remote="davidbrazdil" name="cheri-art_libnativehelper" revision="cheri" groups="pdk-java" />
   <project path="external/zlib" name="platform/external/zlib" groups="pdk" />
   <project path="external/compiler-rt" name="platform/external/compiler-rt" groups="pdk" />
   <project path="external/gtest" name="platform/external/gtest" groups="pdk" />
