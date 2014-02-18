@@ -16,7 +16,6 @@
     <copyfile src="core/root.mk" dest="Makefile" />
   </project>
   <project path="art" remote="davidbrazdil" name="cheri-art_art" revision="cheri" />
-  <project path="external/stlport" remote="davidbrazdil" name="cheri-art_stlport" revision="cheri" groups="pdk" />
   <project path="external/llvm" remote="davidbrazdil" name="cheri-art_llvm" revision="cheri" groups="pdk" />
   <project path="system/core" remote="davidbrazdil" name="cheri-art_system_core" revision="cheri" groups="pdk" />
   <project path="libnativehelper" remote="davidbrazdil" name="cheri-art_libnativehelper" revision="cheri" groups="pdk-java" />
@@ -26,6 +25,7 @@
   <project path="external/valgrind" name="platform/external/valgrind" groups="pdk" />
 
 <!--
+  <project path="external/stlport" remote="davidbrazdil" name="cheri-art_stlport" revision="cheri" groups="pdk" />
   <project path="external/clang" name="platform/external/clang" groups="pdk" />
   <project path="device/common" name="device/common" />
   <project path="device/generic/mips" name="device/generic/mips" groups="pdk" />
